@@ -1,0 +1,149 @@
+﻿<Window x:Class="HomeworkHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HomeworkHelper"
+        xmlns:converter="clr-namespace:HomeworkHelper.Converters"
+        mc:Ignorable="d"
+        Title="Homework Helper" Height="450" Width="700"
+        WindowStartupLocation="CenterScreen" 
+        Closing="Window_Closing"
+        ResizeMode="NoResize" Icon="/icon.jpg">
+    <Window.Resources>
+        <converter:StatusConverter x:Key="StatusConverter" />
+        <converter:DateToColorConverter x:Key="DateToColorConverter" />
+        <converter:FormatedDateConverter x:Key="FormatedDateConverter" />
+        <converter:PageCountConverter x:Key="PageCountConverter" />
+        <converter:PageCountColorConverter x:Key="PageCountColorConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ListBox Name="subjects_listBox"
+                     SelectionChanged="Subjects_listBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock
+                                       Text="{Binding SubjectName}"
+                                       FontSize="16"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock 
+                                       Text="Pages left: "
+                                       FontSize="12"
+                                       Foreground="Gray"/>
+                                    <TextBlock 
+                                       Text="{Binding PageCount}"
+                                       FontSize="12"
+                                       Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="0" x:Name="grid_1">
+                    <StackPanel/>
+
+                </Grid>
+                <Button Name="spreadButton"
+                        Content="Spread"
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Click="SplitButton_Click"
+                        IsEnabled="False"/>
+                <Button x:Name="addButton"
+                        Content="Add"
+                        Click="AddButton_Click"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        />
+                <Button x:Name="editButton" 
+                        Content="Edit"
+                        Click="EditButton_Click" 
+                        IsEnabled="False"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+                <Button x:Name="completeButton"
+                        Content="Complete"
+                        IsEnabled="False"
+                        Click="CompleteButton_Click"
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+                <Button x:Name="deleteButton"
+                        Content="Delete"
+                        IsEnabled="False"
+                        Click="DeleteButton_Click"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+                <Button x:Name="saveButton"
+                        Content="Save"
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Click="SaveButton_Click"
+                        IsEnabled="False"/>
+            </Grid>
+        </Grid>
+        <ListBox x:Name="objectives_listBox"
+                 Grid.Column="1"
+                 SelectionChanged="Objects_listBox_SelectionChanged" RenderTransformOrigin="0.5,0.5" BorderThickness="0,0,0,1">
+            <ListBox.Background>
+                <ImageBrush Opacity="0.25" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </ListBox.Background>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding PageCount, Converter={StaticResource PageCountConverter}}"
+                                   FontSize="18"
+                                   Foreground="{Binding PageCount, Converter={StaticResource PageCountColorConverter}}"/>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource StatusConverter}">
+                                    <Binding Path="ObjectiveDate" />
+                                    <Binding Path="IsCompleted" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                            <TextBlock.Foreground>
+                                <MultiBinding Converter="{StaticResource DateToColorConverter}">
+                                    <Binding Path="ObjectiveDate" />
+                                    <Binding Path="IsCompleted" />
+                                </MultiBinding>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <TextBlock Text="{Binding ObjectiveDate, Converter={StaticResource FormatedDateConverter}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Image HorizontalAlignment="Left" Height="224" Margin="210,217,0,0" VerticalAlignment="Top" Width="210" Grid.Column="1" Source="/background.png" Opacity="0.25"/>
+    </Grid>
+</Window>
