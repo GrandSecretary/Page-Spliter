@@ -9,29 +9,29 @@ namespace HomeworkHelper
     public struct Subject
     {
         /// <summary>
-        /// Назва предмету
+        /// Subject name
         /// </summary>
         public string SubjectName { set; get; }
         /// <summary>
-        /// Кількість сторінок
+        /// Page count
         /// </summary>
         public int PageCount { set; get; }
         /// <summary>
-        /// Дата дедлайну
+        /// Deadline
         /// </summary>
         public DateTime DeadLine { set; get; }
         /// <summary>
-        /// Розподіл по дням
+        /// Distribution by day
         /// </summary>
         public Objective[] Objectives { set; get; }
 
         /// <summary>
-        /// Предмет, який треба освоїти за період часу
+        /// A subject to be mastered over a period of time
         /// </summary>
-        /// <param name="SubjectName">Назва предмету</param>
-        /// <param name="PageCount">Кількість сторінок</param>
-        /// <param name="DeadLine">Дата дедлайну</param>
-        /// <param name="Objectives">Розподіл по дням</param>
+        /// <param name="SubjectName">Subject name</param>
+        /// <param name="PageCount">Page count</param>
+        /// <param name="DeadLine"> Deadlineу</param>
+        /// <param name="Objectives">Distribution by day</param>
         public Subject(string SubjectName, int PageCount, DateTime DeadLine, Objective[] Objectives)
         {
             this.SubjectName = SubjectName;

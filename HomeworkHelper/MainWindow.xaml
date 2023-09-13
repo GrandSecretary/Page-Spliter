@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HomeworkHelper"
         xmlns:converter="clr-namespace:HomeworkHelper.Converters"
         mc:Ignorable="d"
-        Title="Homework Helper" Height="450" Width="700"
+        Title="Page Spliter" Height="450" Width="700"
         WindowStartupLocation="CenterScreen" 
         Closing="Window_Closing"
         ResizeMode="NoResize" Icon="/icon.jpg">
