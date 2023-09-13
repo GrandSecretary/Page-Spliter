@@ -60,6 +60,7 @@ namespace HomeworkHelper
             try
             {
                 pageCount = Convert.ToInt32(pageCount_textBox.Text);
+                if (pageCount < 0) throw new FormatException();
                 try
                 {
                     deadline = Convert.ToDateTime(deadline_textBox.Text);
