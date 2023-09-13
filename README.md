@@ -22,5 +22,5 @@ There are times when you may miss a day with pages for some reason. You can catc
 Just saving the changes you've made
 
 # How to install?
-You can download the repository by following this link, or download the installation archive by following this link:
+You can clone the repository by following this link, or download the installation archive by following this link:
 https://drive.google.com/file/d/1pCnxT2xNIaeq5kADFZyaldQJ5XunNehg/view?usp=sharing
