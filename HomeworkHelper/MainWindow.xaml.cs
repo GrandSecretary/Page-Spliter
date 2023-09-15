@@ -50,17 +50,31 @@ namespace HomeworkHelper
                     int number = pageCount / days;
                     for (int i = 0; i < objectives.Length; i++)
                     {
-                        if (pageCount % number != 0)
+                        if (number != 1)
                         {
-                            objectives[i].PageCount = number + 1;
-                            objectives[i].ObjectiveDate = today.AddDays(i);
-                            pageCount -= number + 1;
+                            if (pageCount % number != 0)
+                            {
+                                objectives[i].PageCount = number + 1;
+                                objectives[i].ObjectiveDate = today.AddDays(i);
+                                pageCount -= number + 1;
+                            }
+                            else
+                            {
+                                objectives[i].PageCount = number;
+                                objectives[i].ObjectiveDate = today.AddDays(i);
+                                pageCount -= number;
+                            }
                         }
                         else
                         {
-                            objectives[i].PageCount = number;
-                            objectives[i].ObjectiveDate = today.AddDays(i);
-                            pageCount -= number;
+                            if(pageCount != 0)
+                            {
+                                objectives[i].PageCount++;
+                                objectives[i].ObjectiveDate = today.AddDays(i);
+                                pageCount--;
+                                if (i == objectives.Length - 1) i = -1;
+
+                            }
                         }
                     }
                 }
