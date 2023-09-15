@@ -24,6 +24,8 @@ namespace HomeworkHelper
         public ObservableCollection<Subject> Import(string path)
         {
             ObservableCollection<Subject> subjects;
+
+            
             try
             {
                 XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Subject>));

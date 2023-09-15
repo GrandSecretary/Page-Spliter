@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,16 @@ namespace HomeworkHelper
 
 
         readonly XMLSerializator serialization = new XMLSerializator();
+
+        private ObservableCollection<Subject> ImportSavedData()
+        {
+            string path = String.Format($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Page Spliter\saved.xml");
+
+            DirectoryInfo directory = new DirectoryInfo($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Page Spliter");
+            if (!directory.Exists) Directory.CreateDirectory($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Page Spliter");
+
+            return serialization.Import(path);
+        }
 
         private Objective[] DaysDistribution(int pageCount, DateTime deadline)
         {
@@ -106,7 +117,7 @@ namespace HomeworkHelper
         {
             InitializeComponent();
 
-            subjects = serialization.Import(@"Saved.xml");
+            subjects = ImportSavedData();
             subjects_listBox.ItemsSource = subjects;
             objectives_listBox.ItemsSource = objs;
         }
@@ -296,7 +307,7 @@ namespace HomeworkHelper
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            serialization.Export(@"Saved.xml", subjects);
+            serialization.Export($@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\Page Spliter\saved.xml", subjects);
             saveButton.IsEnabled = false;
         }
     }
