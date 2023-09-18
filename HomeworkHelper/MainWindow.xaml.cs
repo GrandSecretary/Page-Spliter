@@ -279,10 +279,8 @@ namespace HomeworkHelper
             objectivesList.Remove(selectedObjective);
             objectives = objectivesList.ToArray();
 
-            int minPageCount = objectives.Min(objective => objective.PageCount);
-            int indexOfMinPageCount = Array.FindIndex(objectives, objective => objective.PageCount == minPageCount);
 
-            for (int i = indexOfMinPageCount; pageCount > 0; i++)
+            for (int i = 0; pageCount > 0; i++)
             {
                 if ((objectives[i].ObjectiveDate - DateTime.Today).Days >= 0 && !objectives[i].IsCompleted)
                 {
@@ -291,7 +289,7 @@ namespace HomeworkHelper
                 }
 
 
-                if (i == objectives.Length - 1) i = 0;
+                if (i == objectives.Length - 1) i = -1;
             }
 
             objs = new ObservableCollection<Objective>(objectives);
@@ -302,6 +300,8 @@ namespace HomeworkHelper
 
 
             subjects_listBox.SelectedIndex = chosenSubjectSelection;
+
+            saveButton.IsEnabled = true;
         }
 
 
