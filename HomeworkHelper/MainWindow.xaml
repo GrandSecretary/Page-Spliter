@@ -9,7 +9,7 @@
         Title="Page Spliter" Height="450" Width="700"
         WindowStartupLocation="CenterScreen" 
         Closing="Window_Closing"
-        ResizeMode="NoResize" Icon="/icon.jpg">
+        ResizeMode="CanMinimize" Icon="/icon.jpg">
     <Window.Resources>
         <converter:StatusConverter x:Key="StatusConverter" />
         <converter:DateToColorConverter x:Key="DateToColorConverter" />
