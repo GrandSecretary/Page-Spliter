@@ -40,75 +40,21 @@ namespace HomeworkHelper
 
                 DateTime today = DateTime.Today;
                 int days = (deadline - today).Days;
-                Objective[] objectives;
+                Objective[] objectives = new Objective[days];
 
+                for (int i = 0; i < objectives.Length; i++) objectives[i].ObjectiveDate = today.AddDays(i);
 
-
-                if (pageCount < days)
+                for (int i = 0; pageCount != 0; i++)
                 {
-                    objectives = new Objective[days];
-                    for (int i = 0; i < objectives.Length; i++)
-                    {
-                        if (pageCount > 0) objectives[i].PageCount = 1;
-                        objectives[i].ObjectiveDate = today.AddDays(i);
-                        pageCount -= 1;
-                    }
+                    objectives[i].PageCount++;
+                    pageCount--;
+
+                    if (i == objectives.Length - 1) i = -1;
                 }
 
-                else
-                {
-                    objectives = new Objective[days];
-                    int number = pageCount / days;
-                    for (int i = 0; i < objectives.Length; i++)
-                    {
-                        if (number != 1)
-                        {
-                            if (pageCount % number != 0)
-                            {
-                                objectives[i].PageCount = number + 1;
-                                objectives[i].ObjectiveDate = today.AddDays(i);
-                                pageCount -= number + 1;
-                            }
-                            else
-                            {
-                                objectives[i].PageCount = number;
-                                objectives[i].ObjectiveDate = today.AddDays(i);
-                                pageCount -= number;
-                            }
-                        }
-                        else
-                        {
-                            if(pageCount != 0)
-                            {
-                                objectives[i].PageCount++;
-                                objectives[i].ObjectiveDate = today.AddDays(i);
-                                pageCount--;
-                                if (i == objectives.Length - 1) i = -1;
-
-                            }
-                        }
-                    }
-                }
-
-                if (pageCount > 0)
-                {
-                    int number = objectives[0].PageCount;
-                    for (int i = 0; i < objectives.Length; i++)
-                    {
-                        if (pageCount != 0)
-                        {
-                            if (objectives[i].PageCount != number)
-                            {
-                                objectives[i].PageCount += 1;
-                                pageCount--;
-                            }
-                            else continue;
-                        }
-                        else break;
-                    }
-                }
 
                 return objectives;
+
             }
             else return null;
         }
