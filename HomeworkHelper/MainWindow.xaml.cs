@@ -225,8 +225,10 @@ namespace HomeworkHelper
             objectivesList.Remove(selectedObjective);
             objectives = objectivesList.ToArray();
 
+            int minPageCount = objectives.Min(objective => objective.PageCount);
+            int firstMinIndex = Array.IndexOf(objectives, objectives.First(objective => objective.PageCount == minPageCount));
 
-            for (int i = 0; pageCount > 0; i++)
+            for (int i = firstMinIndex; pageCount > 0; i++)
             {
                 if ((objectives[i].ObjectiveDate - DateTime.Today).Days >= 0 && !objectives[i].IsCompleted)
                 {
